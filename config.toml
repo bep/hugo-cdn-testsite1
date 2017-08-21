@@ -1,0 +1,4 @@
+baseURL = "https://cdn1.bep.is/"
+languageCode = "en-us"
+title = "CDN testsite1"
+theme = "ananke"
