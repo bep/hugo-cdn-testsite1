@@ -1,5 +1,6 @@
 ---
-title: "Site1 Second Post"
+title: "Fantine #3"
+slug: "fantine"
 date: 2017-08-22T10:03:46+02:00
 ---
 

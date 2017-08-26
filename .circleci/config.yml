@@ -1,30 +1,18 @@
 version: 2
 jobs:
-    build:
-      environment:
-        CIRCLE_BUILD_DIR: $HOME/$CIRCLE_PROJECT_REPONAME
-        PATH: $PATH:$CIRCLE_BUILD_DIR/bin
-      post:
-        - mkdir -p $CIRCLE_BUILD_DIR/bin
-
-    dependencies:
-      pre:
-        - bash ./ci-install-hugo.sh
-        - go get -v github.com/bep/s3deploy
-      cache_directories:
-        - bin
-
-    test:
-      pre:
-        - pygmentize -V
-      override:
-        - hugo -v
-
-    checkout:
-      post:
-        - git submodule update --recursive --init 
-    deployment:
-      s3up:
-        branch: master
-        commands:
-          - s3deploy -config=../.s3deploy.yml -source=public/ -region=eu-west-1 -bucket=hugocdn.test -path=site1
+  build:
+    docker:
+      - image: bepsays/ci-hugo:latest
+    steps:
+      - checkout
+      - run: git submodule update --init
+      - run: 
+          command: |
+            hugo
+            s3deploy -source=public/ -region=eu-west-1 -bucket=hugocdn.test -path=site1 
+      - run: curl "https://cdn1.bep.is/__s3p/purge?expires=1507372365&sig=Dyj59gGcnFafFYMcat4HTjPWu1M%3D"
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
