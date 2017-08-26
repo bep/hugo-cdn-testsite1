@@ -22,11 +22,9 @@ jobs:
 
     checkout:
       post:
-        - git submodule sync --recursive
         - git submodule update --recursive --init 
-
     deployment:
       s3up:
         branch: master
         commands:
-          - s3deploy -source=public/ -region=eu-west-1 -bucket=hugocdn.test -path=site1
+          - s3deploy -config=../.s3deploy.yml -source=public/ -region=eu-west-1 -bucket=hugocdn.test -path=site1
