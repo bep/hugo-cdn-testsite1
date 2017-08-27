@@ -6,11 +6,10 @@ jobs:
     steps:
       - checkout
       - run: git submodule update --init
-      - run: 
+      - run:
           command: |
             hugo
-            s3deploy -source=public/ -region=eu-west-1 -bucket=hugocdn.test -path=site1 
-      - run: curl "https://cdn1.bep.is/__s3p/purge?expires=1507372365&sig=Dyj59gGcnFafFYMcat4HTjPWu1M%3D"
+            s3pdeploy -source=public/ -region=eu-west-1 -bucket=hugocdn.test -path=site1
 workflows:
   version: 2
   build_and_test:
