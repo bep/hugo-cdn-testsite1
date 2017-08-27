@@ -1,6 +1,6 @@
 baseURL = "https://cdn1.bep.is/"
 #baseURL = "http://localhost:8080"
 languageCode = "en-us"
-title = "CDN Test Site #1!"
+title = "CDN: Test Site #1!"
 theme = "ananke"
 disableKinds = ["taxonomy", "taxonomyTerm"]

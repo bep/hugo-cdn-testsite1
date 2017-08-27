@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: bepsays/ci-hugo:latest
+      - image: bepsays/ci-hugo-deploy:latest
     steps:
       - checkout
       - run: git submodule update --init
